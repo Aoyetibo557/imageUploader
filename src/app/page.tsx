@@ -72,15 +72,16 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-white text-black min-h-screen p-8 space-y-8">
+    <div className="bg-white w-full text-black min-h-screen p-8 space-y-8">
       {contextHolder}
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center w-[100%] pr-3 sticky top-0 h-15 bg-white z-50">
         <SearchBar onSearch={handleSearch} searchTerm={searchVal} />
         <Button
           icon={<UploadOutlined />}
           type="primary"
-          onClick={() => setShowUpload(true)}>
-          Upload Image
+          onClick={() => setShowUpload(true)}
+          className="flex items-center">
+          <span className="hidden sm:inline ml-2">Upload Image</span>
         </Button>
       </div>
 

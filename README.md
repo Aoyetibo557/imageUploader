@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Image Uploader App
 
-## Getting Started
+This is a [Next.js](https://nextjs.org) app built using TypeScript, Tailwind CSS, and Ant Design. It allows users to upload, search, rename, and delete images. Images are stored using a mock API (via `json-server`).
 
-First, run the development server:
+---
+
+## 🕒 Time to Complete
+
+**Approximate time spent:** ~9.5 hours  
+**Tech stack:** Next.js App Router, TypeScript, Tailwind CSS, Ant Design, json-server
+
+---
+
+## 📌 What’s Included
+
+✅ Upload one or multiple images  
+✅ Drag & drop image upload with preview  
+✅ Filter/search images by name with debounce  
+✅ Rename and delete image functionality  
+✅ Empty state UX for no images  
+✅ Responsive image grid layout  
+✅ Modal confirmation before destructive actions  
+✅ Local image persistence via `json-server`
+
+---
+
+## 🛠️ Improvements (if given more time)
+
+- Add rename modal with inline editing
+- Add pagination or infinite scroll
+- Add image tags/categories and filtering
+- Persist search state to URL/query string
+- Improve image compression before upload
+- Add automated tests (unit + integration)
+- Accessibility improvements (e.g., focus traps, ARIA)
+- Drag-to-reorder support or folders
+- Real backend integration with authentication
+
+---
+
+## 🚀 Getting Started
+
+### 1. Install dependencies
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

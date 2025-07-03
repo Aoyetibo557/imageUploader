@@ -45,7 +45,7 @@ const ImageGrid: React.FC<ImageGridProps> = ({
   ];
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 gap-4 mt-8">
+    <div className="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
       {loading
         ? [1, 2, 3, 4, 5, 6, 7, 8].map((key) => (
             <div key={key} className="flex flex-col gap-3">
@@ -69,13 +69,13 @@ const ImageGrid: React.FC<ImageGridProps> = ({
             return (
               <div key={img.id} className="flex flex-col gap-3">
                 <Image
-                  width={350}
+                  width="100%"
                   height={200}
                   src={img.url}
                   alt={img.name}
                   style={{ objectFit: "cover", borderRadius: 8 }}
                 />
-                <div className="flex justify-between items-start w-[350px]">
+                <div className="flex justify-between items-start">
                   <div className="flex flex-col">
                     <span className="text-sm font-medium">{img.name}</span>
                     <span className="text-sm text-gray-500">
