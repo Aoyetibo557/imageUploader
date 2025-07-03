@@ -1,0 +1,28 @@
+@import "tailwind/base";
+@import "tailwind/utilities";
+@layer base {
+    html {
+        font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+}
+
+@layer components {
+    .btn-primary {
+        @apply bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200;
+    }
+    .btn-secondary {
+        @apply bg-gray-500 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200;
+    }
+    .btn-danger {
+        @apply bg-red-500 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200;
+    }
+    .card {
+        @apply bg-white rounded-xl shadow-lg p-6 transition-all duration-200;
+    }
+    .input-field {
+        @apply w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus: border-primary-500 focus: outline-none transition-colors duration-200;
+    }
+    .glass-card {
+        @apply bg-white/90 backdrop-blur-sm rounded-xl shadow-xl border border-white/20;
+    }
+}
