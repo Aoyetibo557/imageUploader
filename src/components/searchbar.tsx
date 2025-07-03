@@ -28,7 +28,11 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, searchTerm }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex md:justify-between space-x-4">
+    <form
+      onSubmit={handleSubmit}
+      className="flex md:justify-between space-x-4"
+      role="search"
+      aria-label="Search images">
       <Input
         allowClear
         placeholder="Search images by name"
@@ -36,6 +40,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, searchTerm }) => {
         value={inputVal}
         onChange={handleInputChange}
         onClear={handleClear}
+        aria-label="Search images by name"
+        role="searchbox"
       />
     </form>
   );

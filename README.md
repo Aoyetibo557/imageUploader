@@ -31,7 +31,7 @@ This is a [Next.js](https://nextjs.org) app built using TypeScript, Tailwind CSS
 - Persist search state to URL/query string
 - Improve image compression before upload
 - Add automated tests (unit + integration)
-- Accessibility improvements (e.g., focus traps, ARIA)
+- Accessibility improvements
 - Drag-to-reorder support or folders
 - Real backend integration with authentication
 

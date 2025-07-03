@@ -62,9 +62,15 @@ const ImageGrid: React.FC<ImageGridProps> = ({
     return images.slice(startIndex, endIndex);
   };
 
+  const totlaPages = Math.ceil(images.lengt / pageSize);
+  const currentImages = getPaginatedData();
+
   return (
     <div>
-      <div className="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+      <div
+        className="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8"
+        role="grid"
+        aria-label={`Image gallery, showing ${currentImages.length} of ${images.length} images`}>
         {loading
           ? [1, 2, 3, 4, 5, 6, 7, 8].map((key) => (
               <div key={key} className="flex flex-col gap-3">
@@ -84,27 +90,40 @@ const ImageGrid: React.FC<ImageGridProps> = ({
                 />
               </div>
             ))
-          : getPaginatedData().map((img) => {
+          : currentImages.map((img) => {
               return (
                 <div key={img.id} className="flex flex-col gap-3">
                   <Image
                     width="100%"
                     height={200}
                     src={img.url}
-                    alt={img.name}
+                    alt={`${img.name} - uploaded ${formatDate(img.uploadDate)}`}
                     style={{ objectFit: "cover", borderRadius: 8 }}
                   />
                   <div className="flex justify-between items-start">
                     <div className="flex flex-col">
-                      <span className="text-sm font-medium">{img.name}</span>
-                      <span className="text-sm text-gray-500">
+                      <span
+                        className="text-sm font-medium"
+                        aria-label={`Image name: ${img.name}`}>
+                        {img.name}
+                      </span>
+                      <span
+                        className="text-sm text-gray-500"
+                        aria-label={`Upload date: ${formatDate(
+                          img.uploadDate
+                        )}`}>
                         {formatDate(img.uploadDate)}
                       </span>
                     </div>
                     <Dropdown
                       menu={{ items: getMenuItems(img) }}
                       trigger={["click"]}>
-                      <DashOutlined className="cursor-pointer text-lg" />
+                      <button
+                        className="cursor-pointer text-lg border-none bg-transparent p-1 hover:bg-gray-100 rounded"
+                        aria-label={`Open menu for ${img.name}`}
+                        aria-expanded="false">
+                        <DashOutlined />
+                      </button>
                     </Dropdown>
                   </div>
                 </div>
@@ -120,6 +139,7 @@ const ImageGrid: React.FC<ImageGridProps> = ({
           onChange={handlePageChange}
           pageSize={pageSize}
           className="mt-10"
+          aria-label={`Page ${currentPage} of ${totalPages}`}
         />
       )}
     </div>

@@ -107,6 +107,7 @@ const UploadModal: React.FC<UploadModalProps> = ({
         onOk={handleUpload}
         onCancel={onClose}
         width={600}
+        aria-label={`Upload image modal`}
         okText={isUploading ? "Uploading..." : "Upload"}
         okButtonProps={{ disabled: fileList.length === 0 || isUploading }}
         cancelText="Cancel">
