@@ -27,7 +27,6 @@ This is a [Next.js](https://nextjs.org) app built using TypeScript, Tailwind CSS
 ## 🛠️ Improvements (if given more time)
 
 - Add rename modal with inline editing
-- Add pagination or infinite scroll
 - Add image tags/categories and filtering
 - Persist search state to URL/query string
 - Improve image compression before upload
@@ -44,4 +43,22 @@ This is a [Next.js](https://nextjs.org) app built using TypeScript, Tailwind CSS
 
 ```bash
 npm install
+```
+
+### 2. Start App
+
+```bash
+npm run dev
+```
+
+### 3. Start Server
+
+```bash
+npm start server
+```
+
+### 4. Start both together
+
+```bash
+npm run start:server
 ```

@@ -1,5 +1,5 @@
-import React from "react";
-import { Image, Skeleton, Dropdown, Menu } from "antd";
+import React, { useState, useEffect } from "react";
+import { Image, Skeleton, Dropdown, Menu, Pagination } from "antd";
 import { DashOutlined } from "@ant-design/icons";
 import { Image as ImageType } from "../types/index";
 import type { MenuProps } from "antd";
@@ -30,10 +30,22 @@ const ImageGrid: React.FC<ImageGridProps> = ({
   onDeleteRequest,
   onRename,
 }) => {
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const pageSize = 15;
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [images]);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   const getMenuItems = (img: ImageType): MenuProps["items"] => [
     {
       key: "rename",
       label: "Rename",
+      disabled: true,
       onClick: () => onRename(img),
     },
     {
@@ -44,53 +56,72 @@ const ImageGrid: React.FC<ImageGridProps> = ({
     },
   ];
 
+  const getPaginatedData = () => {
+    const startIndex = (currentPage - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    return images.slice(startIndex, endIndex);
+  };
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
-      {loading
-        ? [1, 2, 3, 4, 5, 6, 7, 8].map((key) => (
-            <div key={key} className="flex flex-col gap-3">
-              <Skeleton.Image
-                active={true}
-                style={{ width: 350, height: 200 }}
-              />
-              <Skeleton.Input
-                active={true}
-                size="small"
-                style={{ width: 150 }}
-              />
-              <Skeleton.Input
-                active={true}
-                size="small"
-                style={{ width: 100 }}
-              />
-            </div>
-          ))
-        : images.map((img) => {
-            return (
-              <div key={img.id} className="flex flex-col gap-3">
-                <Image
-                  width="100%"
-                  height={200}
-                  src={img.url}
-                  alt={img.name}
-                  style={{ objectFit: "cover", borderRadius: 8 }}
+    <div>
+      <div className="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+        {loading
+          ? [1, 2, 3, 4, 5, 6, 7, 8].map((key) => (
+              <div key={key} className="flex flex-col gap-3">
+                <Skeleton.Image
+                  active={true}
+                  style={{ width: 350, height: 200 }}
                 />
-                <div className="flex justify-between items-start">
-                  <div className="flex flex-col">
-                    <span className="text-sm font-medium">{img.name}</span>
-                    <span className="text-sm text-gray-500">
-                      {formatDate(img.uploadDate)}
-                    </span>
-                  </div>
-                  <Dropdown
-                    menu={{ items: getMenuItems(img) }}
-                    trigger={["click"]}>
-                    <DashOutlined className="cursor-pointer text-lg" />
-                  </Dropdown>
-                </div>
+                <Skeleton.Input
+                  active={true}
+                  size="small"
+                  style={{ width: 150 }}
+                />
+                <Skeleton.Input
+                  active={true}
+                  size="small"
+                  style={{ width: 100 }}
+                />
               </div>
-            );
-          })}
+            ))
+          : getPaginatedData().map((img) => {
+              return (
+                <div key={img.id} className="flex flex-col gap-3">
+                  <Image
+                    width="100%"
+                    height={200}
+                    src={img.url}
+                    alt={img.name}
+                    style={{ objectFit: "cover", borderRadius: 8 }}
+                  />
+                  <div className="flex justify-between items-start">
+                    <div className="flex flex-col">
+                      <span className="text-sm font-medium">{img.name}</span>
+                      <span className="text-sm text-gray-500">
+                        {formatDate(img.uploadDate)}
+                      </span>
+                    </div>
+                    <Dropdown
+                      menu={{ items: getMenuItems(img) }}
+                      trigger={["click"]}>
+                      <DashOutlined className="cursor-pointer text-lg" />
+                    </Dropdown>
+                  </div>
+                </div>
+              );
+            })}
+      </div>
+      {images && images.length > pageSize && (
+        <Pagination
+          current={currentPage}
+          align="center"
+          total={images?.length}
+          responsive={true}
+          onChange={handlePageChange}
+          pageSize={pageSize}
+          className="mt-10"
+        />
+      )}
     </div>
   );
 };
