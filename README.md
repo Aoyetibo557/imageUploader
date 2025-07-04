@@ -4,14 +4,14 @@ This is a [Next.js](https://nextjs.org) app built using TypeScript, Tailwind CSS
 
 ---
 
-## 🕒 Time to Complete
+## Time to Complete
 
-**Approximate time spent:** ~9.5 hours  
+**Approximate time spent:** ~11.5 hours  
 **Tech stack:** Next.js App Router, TypeScript, Tailwind CSS, Ant Design, json-server
 
 ---
 
-## 📌 What’s Included
+## What’s Included
 
 ✅ Upload one or multiple images  
 ✅ Drag & drop image upload with preview  
@@ -24,7 +24,7 @@ This is a [Next.js](https://nextjs.org) app built using TypeScript, Tailwind CSS
 
 ---
 
-## 🛠️ Improvements (if given more time)
+## Improvements (if given more time)
 
 - Add rename modal with inline editing
 - Add image tags/categories and filtering
@@ -34,6 +34,14 @@ This is a [Next.js](https://nextjs.org) app built using TypeScript, Tailwind CSS
 - Accessibility improvements
 - Drag-to-reorder support or folders
 - Real backend integration with authentication
+
+---
+
+## ScreenShots (Images)
+
+![Onload Image](image.png)
+![Searching for an Image](image-1.png)
+![Deleting an Image](image-2.png)
 
 ---
 

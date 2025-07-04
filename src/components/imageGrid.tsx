@@ -24,6 +24,17 @@ export const formatDate = (isoDate: string): string => {
   });
 };
 
+export const truncate = (
+  str: string,
+  maxLength: number = 50,
+  suffix: string = "..."
+): string => {
+  if (!str) return "";
+  if (str.length <= maxLength) return str;
+
+  return str.substring(0, maxLength - suffix.length) + suffix;
+};
+
 const ImageGrid: React.FC<ImageGridProps> = ({
   images,
   loading,
@@ -62,7 +73,7 @@ const ImageGrid: React.FC<ImageGridProps> = ({
     return images.slice(startIndex, endIndex);
   };
 
-  const totlaPages = Math.ceil(images.lengt / pageSize);
+  const totalPages = Math.ceil(images.length / pageSize);
   const currentImages = getPaginatedData();
 
   return (
@@ -105,7 +116,7 @@ const ImageGrid: React.FC<ImageGridProps> = ({
                       <span
                         className="text-sm font-medium"
                         aria-label={`Image name: ${img.name}`}>
-                        {img.name}
+                        {truncate(img.name, 35)}
                       </span>
                       <span
                         className="text-sm text-gray-500"
@@ -138,7 +149,7 @@ const ImageGrid: React.FC<ImageGridProps> = ({
           responsive={true}
           onChange={handlePageChange}
           pageSize={pageSize}
-          className="mt-10"
+          className="mt-16"
           aria-label={`Page ${currentPage} of ${totalPages}`}
         />
       )}
