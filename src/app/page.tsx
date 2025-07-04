@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import SearchBar from "../components/searchbar";
 import UploadModal from "../components/uploadModal";
 import ImageGrid from "../components/imageGrid";
-import { Image } from "../types/index";
+import { Image, ImageUpload } from "../types/index";
 import { imageService } from "../services/api";
 import { Button, Modal, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
@@ -11,9 +11,8 @@ import { UploadOutlined } from "@ant-design/icons";
 export default function Home() {
   const [searchVal, setSearchVal] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState<Image[]>([]);
   const [showUpload, setShowUpload] = useState<boolean>(false);
-  const [showDelete, setShowDelete] = useState<boolean>(false);
   const [imageToDelete, setImageToDelete] = useState<Image | null>(null);
 
   const [messageApi, contextHolder] = message.useMessage();
@@ -23,7 +22,7 @@ export default function Home() {
       setLoading(true);
       const data = await imageService.getAllImages();
       setImages(data);
-    } catch (err: Error) {
+    } catch (err) {
       console.error("Error loading images", err);
     } finally {
       setLoading(false);
@@ -54,9 +53,7 @@ export default function Home() {
     await imageService.renameImage(image);
   };
 
-  const handleUploadImages = async (
-    newImages: { name: string; url: string }[]
-  ) => {
+  const handleUploadImages = async (newImages: ImageUpload[]) => {
     for (const img of newImages) {
       await imageService.uploadImage(img);
     }
@@ -89,7 +86,7 @@ export default function Home() {
         <div className="flex flex-col items-center justify-center mt-20 text-center space-y-4">
           <h2 className="text-lg font-semibold">No images found</h2>
           <p className="text-gray-500">
-            You haven't uploaded any images yet. Click below to get started.
+            {`You haven't uploaded any images yet. Click below to get started.`}
           </p>
           <Button
             icon={<UploadOutlined />}

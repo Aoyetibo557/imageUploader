@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { Modal, Upload, message, Button, Image } from "antd";
-import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
+import { Modal, Upload, message } from "antd";
+import { InboxOutlined } from "@ant-design/icons";
 import type { UploadFile, UploadProps } from "antd";
+import { ImageUpload } from "../types/index";
 
 const { Dragger } = Upload;
 
@@ -11,7 +12,7 @@ type FileType = File;
 interface UploadModalProps {
   visible: boolean;
   onClose: () => void;
-  onUpload: (images: { name: string; url: string }[]) => Promise<void>;
+  onUpload: (images: ImageUpload[]) => Promise<void>;
 }
 
 const getBase64 = (file: FileType): Promise<string> =>
@@ -50,7 +51,7 @@ const UploadModal: React.FC<UploadModalProps> = ({
         })
       );
 
-      const res = await onUpload(base64Images);
+      await onUpload(base64Images);
       messageApi.destroy();
       messageApi.success("Images uploaded successfully.");
       setFileList([]);
@@ -69,7 +70,7 @@ const UploadModal: React.FC<UploadModalProps> = ({
     multiple: true,
     accept: "image/*",
     fileList,
-    beforeUpload: (file) => false, // prevent auto-upload
+    beforeUpload: () => false, // prevent auto-upload
     onChange: async (info) => {
       const filesWithPreview = await Promise.all(
         info.fileList.map(async (file) => {

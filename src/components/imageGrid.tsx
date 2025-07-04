@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Image, Skeleton, Dropdown, Menu, Pagination } from "antd";
+import { Image, Skeleton, Dropdown, Pagination } from "antd";
 import { DashOutlined } from "@ant-design/icons";
 import { Image as ImageType } from "../types/index";
 import type { MenuProps } from "antd";
@@ -48,7 +48,7 @@ const ImageGrid: React.FC<ImageGridProps> = ({
     setCurrentPage(1);
   }, [images]);
 
-  const handlePageChange = (page) => {
+  const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
