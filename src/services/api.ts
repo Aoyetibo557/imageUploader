@@ -3,6 +3,8 @@ import { Image, ImageUpload } from "../types";
 
 const API_BASE_URL = "http://localhost:3001";
 
+// "https://images-json-server.vercel.app";
+
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
